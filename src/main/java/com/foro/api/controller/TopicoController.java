@@ -36,7 +36,7 @@ public class TopicoController {
         Topico topico = new Topico(datosTopico, usuarioAutenticado);
         topicoRepository.save(topico);
         URI url = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-        return ResponseEntity.created(url).body(topico);
+        return ResponseEntity.created(url).body(new DatosListarTopico(topico));
     }
 
     @GetMapping

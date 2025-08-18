@@ -27,7 +27,10 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/topicos", "/topicos/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/topicos").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/topicos/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/topicos/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
